@@ -31,7 +31,7 @@ function MainContent({ showWelcome, setShowWelcome }) {
     <main className="container my-4 main-content">
       <div className="section-container">
         {/* Show page name only if not on root */}
-        
+
         {showWelcome ? (
           <WelcomeCard onEnter={() => setShowWelcome(false)} />
         ) : (
@@ -52,16 +52,19 @@ function AppWithRouter() {
   };
 
   return (
-    <>
-      <Header onNameClick={handleNameClick} />
-      <MainContent showWelcome={showWelcome} setShowWelcome={setShowWelcome} />
-      <Footer />
-      <div className="floating-actions">
-        <button className="fab" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          ↑
-        </button>
+    <div id="root">
+      <div className="app-container">
+        <Header onNameClick={handleNameClick} />
+        <MainContent showWelcome={showWelcome} setShowWelcome={setShowWelcome} />
+        <Footer />
+        <div className="floating-actions">
+          <button className="fab" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            ↑
+          </button>
+        </div>
       </div>
-    </>
+    </div>
+
   );
 }
 

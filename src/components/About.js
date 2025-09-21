@@ -68,10 +68,15 @@ const About = () => {
 
       {/* Download CV Button */}
       <div className="text-center mt-5">
-        <button className="btn btn-lg btn-gradient btn-animated">
+        <a
+          href="/Rushikesh Sonar Resume.pdf"
+          download="Rushikesh_Sonar_Resume.pdf"
+          className="btn btn-lg btn-gradient btn-animated"
+        >
           📄 Download CV
-        </button>
+        </a>
       </div>
+
     </section>
   );
 };

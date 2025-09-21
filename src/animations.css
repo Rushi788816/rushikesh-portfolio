@@ -37,6 +37,31 @@
   100% { transform: rotate(360deg); }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ensures main content pushes footer down */
+}
+
+.main-content {
+  flex: 1; /* Fills available space, pushes footer to bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* Fade In Animations */
 @keyframes fadeInUp {
   from {

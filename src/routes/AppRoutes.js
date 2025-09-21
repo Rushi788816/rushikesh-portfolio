@@ -9,7 +9,7 @@ import WelcomeCard from '../components/WelcomeCard';
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Navigate to="/about" />} />
+    <Route path="/" element={<Navigate to="/WelcomeCard" />} />
     <Route path="/about" element={<About />} />
     <Route path="/experience" element={<Experience />} />
     {/* <Route path="/certifications" element={<Certifications />} /> */}

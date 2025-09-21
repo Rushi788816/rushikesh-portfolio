@@ -17,15 +17,15 @@ const WelcomeCard = () => {
   };
 
   const skills = [
-    { icon: "⚛️", label: "React.js", color: "var(--accent-gradient)" },
-    { icon: "🚀", label: "Laravel", color: "var(--secondary-gradient)" },
-    { icon: "🗄️", label: "PHP • MySQL", color: "var(--warning-gradient)" },
-    { icon: "☕", label: "Java", color: "var(--success-gradient)" }
+    { label: "React.js", color: "var(--accent-gradient)" },
+    { label: "Laravel", color: "var(--secondary-gradient)" },
+    { label: "PHP • MySQL", color: "var(--warning-gradient)" },
+    { label: "Java", color: "var(--success-gradient)" }
   ];
 
   return (
     <div className="welcome-hero min-vh-100 d-flex align-items-center justify-content-center p-4 position-relative">
-      
+
       {/* Animated Background Elements */}
       <div className="position-absolute w-100 h-100" style={{ top: 0, left: 0, zIndex: -1 }}>
         <div className="floating-shape shape-1"></div>
@@ -34,52 +34,52 @@ const WelcomeCard = () => {
         <div className="floating-shape shape-4"></div>
       </div>
 
-      <div 
+      <div
         className={`glass-card p-5 text-center position-relative overflow-hidden ${isVisible ? 'animate-fade-in-up' : ''}`}
-        style={{ 
+        style={{
           maxWidth: '800px',
           borderRadius: '2rem',
           background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, transparent 100%)`
         }}
         onMouseMove={handleMouseMove}
       >
-        
+
         {/* Glowing border effect */}
-        <div className="position-absolute top-0 start-0 w-100 h-100" 
-             style={{
-               borderRadius: '2rem',
-               padding: '1px',
-               background: 'var(--primary-gradient)',
-               opacity: '0.3',
-               zIndex: '-1'
-             }}>
-          <div className="w-100 h-100" 
-               style={{
-                 borderRadius: '2rem',
-                 background: 'var(--bg-glass)'
-               }}></div>
+        <div className="position-absolute top-0 start-0 w-100 h-100"
+          style={{
+            borderRadius: '2rem',
+            padding: '1px',
+            background: 'var(--primary-gradient)',
+            opacity: '0.3',
+            zIndex: '-1'
+          }}>
+          <div className="w-100 h-100"
+            style={{
+              borderRadius: '2rem',
+              background: 'var(--bg-glass)'
+            }}></div>
         </div>
 
         {/* Profile Image with Animation */}
         <div className="mb-4 position-relative">
           <div className="d-inline-block position-relative">
             <div className="position-absolute top-50 start-50 translate-middle"
-                 style={{
-                   width: '200px',
-                   height: '200px',
-                   background: 'var(--primary-gradient)',
-                   borderRadius: '50%',
-                   opacity: '0.2',
-                   animation: 'pulse-glow 3s ease-in-out infinite',
-                   zIndex: '-1'
-                 }}></div>
+              style={{
+                width: '200px',
+                height: '200px',
+                background: 'var(--primary-gradient)',
+                borderRadius: '50%',
+                opacity: '0.2',
+                animation: 'pulse-glow 3s ease-in-out infinite',
+                zIndex: '-1'
+              }}></div>
             <img
               src={profile}
               alt="Rushikesh Sonar"
               className="rounded-circle shadow-lg"
-              style={{ 
-                width: '150px', 
-                height: '150px', 
+              style={{
+                width: '150px',
+                height: '150px',
                 objectFit: 'cover',
                 border: '4px solid rgba(255,255,255,0.2)',
                 transition: 'transform 0.3s ease'
@@ -91,28 +91,28 @@ const WelcomeCard = () => {
         </div>
 
         {/* Name with Gradient */}
-        <h1 className="gradient-text mb-3" 
-            style={{ 
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
-              fontWeight: '800',
-              lineHeight: '1.1'
-            }}>
+        <h1 className="gradient-text mb-3"
+          style={{
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            fontWeight: '800',
+            lineHeight: '1.1'
+          }}>
           Hi, I'm Rushikesh Sonar
         </h1>
 
         {/* Title */}
-        <h5 className="text-secondary mb-4" 
-            style={{ 
-              fontSize: '1.3rem', 
-              fontWeight: '600'
-            }}>
+        <h5 className="text-secondary mb-4"
+          style={{
+            fontSize: '1.3rem',
+            fontWeight: '600'
+          }}>
           Junior Software Engineer | Full Stack Developer
         </h5>
 
         {/* Current Company Badge */}
         <div className="mb-4">
-          <div className="glass-card d-inline-block px-4 py-2" 
-               style={{ borderRadius: '25px' }}>
+          <div className="glass-card d-inline-block px-4 py-2"
+            style={{ borderRadius: '25px' }}>
             <span className="text-accent me-2">Currently at</span>
             <strong className="gradient-text">CodeMingle</strong>
           </div>
@@ -126,35 +126,22 @@ const WelcomeCard = () => {
           <div className="row g-3 justify-content-center">
             {skills.map((skill, index) => (
               <div key={index} className={`col-6 col-md-3 ${isVisible ? 'stagger-item' : ''}`}
-                   style={{ animationDelay: `${index * 0.1}s` }}>
+                style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="skill-badge glass-card p-3 h-100 d-flex flex-column align-items-center justify-content-center"
-                     style={{ 
-                       borderRadius: '20px',
-                       transition: 'all 0.3s ease',
-                       cursor: 'pointer'
-                     }}
-                     onMouseEnter={e => {
-                       e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                       e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
-                     }}
-                     onMouseLeave={e => {
-                       e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                       e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                     }}>
-                  {/* <div className="skill-icon mb-2"
-                       style={{
-                         fontSize: '2rem',
-                         width: '50px',
-                         height: '50px',
-                         background: skill.color,
-                         borderRadius: '12px',
-                         display: 'flex',
-                         alignItems: 'center',
-                         justifyContent: 'center'
-                       }}>
-                    {skill.icon}
-                  </div> */}
-                  <span className="text-primary fw-semibold" style={{ fontSize: '0.9rem' }}>
+                  style={{
+                    borderRadius: '20px',
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }}>
+                  <span className="fw-semibold" style={{ fontSize: '0.9rem' }}>
                     {skill.label}
                   </span>
                 </div>
@@ -165,12 +152,12 @@ const WelcomeCard = () => {
 
         {/* Bio */}
         <div className="mb-5">
-          <p className="lead" style={{ 
-              fontSize: '1.1rem', 
-              lineHeight: '1.7',
-              maxWidth: '600px',
-              margin: '0 auto'
-            }}>
+          <p className="lead" style={{
+            fontSize: '1.1rem',
+            lineHeight: '1.7',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
             I'm passionate about building{" "}
             <span className="fw-bold" style={{ color: '#f093fb' }}>scalable</span>,{" "}
             <span className="fw-bold" style={{ color: '#764ba2' }}>user-friendly</span>, and{" "}
@@ -191,92 +178,78 @@ const WelcomeCard = () => {
 
         {/* CTA Buttons */}
         <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center">
-          <button className="btn btn-gradient btn-lg px-4 py-3 btn-animated"
-                  style={{ 
-                    borderRadius: '50px',
-                    fontWeight: '600',
-                    fontSize: '1rem',
-                    minWidth: '180px'
-                  }}
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
-            <span className="me-2">🚀</span>
-            View My Work
-          </button>
-          
-          <button className="btn btn-outline-light btn-lg px-4 py-3 btn-animated"
-                  style={{ 
-                    borderRadius: '50px',
-                    fontWeight: '600',
-                    fontSize: '1rem',
-                    minWidth: '180px',
-                    borderColor: 'rgba(255,255,255,0.3)',
-                    backgroundColor: 'rgba(255,255,255,0.1)'
-                  }}
-                  onClick={() => {
-                    // Create download link for resume
-                    const link = document.createElement('a');
-                    link.href = '/resume.pdf';
-                    link.download = 'Rushikesh_Sonar_Resume.pdf';
-                    link.click();
-                  }}>
+          <a
+            href="/Rushikesh Sonar Resume.pdf"
+            download="Rushikesh_Sonar_Resume.pdf"
+            className="btn btn-outline-light btn-lg px-4 py-3 btn-animated"
+            style={{
+              borderRadius: '50px',
+              fontWeight: '600',
+              fontSize: '1rem',
+              minWidth: '180px',
+              borderColor: 'rgba(255,255,255,0.3)',
+              backgroundColor: 'rgba(255,255,255,0.1)'
+            }}
+          >
             <span className="me-2">📄</span>
             Download Resume
-          </button>
+          </a>
         </div>
+
 
         {/* Social Links */}
         <div className="mt-4 d-flex justify-content-center gap-3">
-          <a href="https://www.linkedin.com/in/rushikesh-sonar-771636187" 
-             target="_blank" 
-             rel="noreferrer"
-             className="social-link text-decoration-none"
-             style={{
-               width: '45px',
-               height: '45px',
-               borderRadius: '50%',
-               background: 'rgba(255,255,255,0.1)',
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center',
-               color: '#0077b5',
-               fontSize: '1.2rem',
-               transition: 'all 0.3s ease'
-             }}
-             onMouseEnter={e => {
-               e.target.style.transform = 'scale(1.1) translateY(-2px)';
-               e.target.style.background = 'rgba(0,119,181,0.2)';
-             }}
-             onMouseLeave={e => {
-               e.target.style.transform = 'scale(1) translateY(0)';
-               e.target.style.background = 'rgba(255,255,255,0.1)';
-             }}>
+          <a href="https://www.linkedin.com/in/rushikesh-sonar-771636187/"
+            target="_blank"
+            rel="noreferrer"
+            className="social-link text-decoration-none"
+            style={{
+              width: '45px',
+              height: '45px',
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#0077b5',
+              fontSize: '1.2rem',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={e => {
+              e.target.style.transform = 'scale(1.1) translateY(-2px)';
+              e.target.style.background = 'rgba(0,119,181,0.2)';
+            }}
+            onMouseLeave={e => {
+              e.target.style.transform = 'scale(1) translateY(0)';
+              e.target.style.background = 'rgba(255,255,255,0.1)';
+            }}>
             💼
           </a>
-          
-          <a href="https://github.com/rushikeshsonar" 
-             target="_blank" 
-             rel="noreferrer"
-             className="social-link text-decoration-none"
-             style={{
-               width: '45px',
-               height: '45px',
-               borderRadius: '50%',
-               background: 'rgba(255,255,255,0.1)',
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center',
-               color: '#333',
-               fontSize: '1.2rem',
-               transition: 'all 0.3s ease'
-             }}
-             onMouseEnter={e => {
-               e.target.style.transform = 'scale(1.1) translateY(-2px)';
-               e.target.style.background = 'rgba(51,51,51,0.2)';
-             }}
-             onMouseLeave={e => {
-               e.target.style.transform = 'scale(1) translateY(0)';
-               e.target.style.background = 'rgba(255,255,255,0.1)';
-             }}>
+
+          <a href="https://github.com/Rushi788816"
+            target="_blank"
+            rel="noreferrer"
+            className="social-link text-decoration-none"
+            style={{
+              width: '45px',
+              height: '45px',
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#333',
+              fontSize: '1.2rem',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={e => {
+              e.target.style.transform = 'scale(1.1) translateY(-2px)';
+              e.target.style.background = 'rgba(51,51,51,0.2)';
+            }}
+            onMouseLeave={e => {
+              e.target.style.transform = 'scale(1) translateY(0)';
+              e.target.style.background = 'rgba(255,255,255,0.1)';
+            }}>
             🔗
           </a>
         </div>

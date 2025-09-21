@@ -8,7 +8,6 @@ const experience = [
       period: "7 months",
       location: "Pune, Maharashtra, India",
       type: "Full-time",
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&h=100&fit=crop",
       description: "Developing and maintaining responsive frontend interfaces using React.js with seamless backend API integration.",
       responsibilities: [
         "Developed and maintained responsive frontend interfaces using React.js",
@@ -21,8 +20,8 @@ const experience = [
       technologies: ["React.js", "JavaScript", "HTML5", "CSS3", "Git", "GitHub", "Agile"],
       achievements: [
         "Improved dashboard performance by 30% through code optimization",
-        "Successfully integrated 5+ backend APIs with frontend components",
-        "Contributed to 3 major feature releases"
+        "Successfully integrated backend APIs with frontend components",
+        "Contributed to major feature releases"
       ]
     },
     {
@@ -33,18 +32,17 @@ const experience = [
       period: "11 months",
       location: "Pune, Maharashtra, India",
       type: "Full-time",
-      logo: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=100&h=100&fit=crop",
       description: "Analyzed digital marketing campaigns and provided insights for data-driven marketing strategies.",
       responsibilities: [
-        "Analyzed digital marketing campaign performance and ROI",
+        "Analyzed digital marketing campaign performance using analytics tools",
         "Created comprehensive reports on marketing metrics and trends",
         "Collaborated with marketing teams to optimize campaign strategies",
         "Managed data collection and analysis for marketing insights"
       ],
-      technologies: ["Analytics Tools", "Data Analysis", "Excel", "SQL", "Reporting"],
+      technologies: ["Analytics Tools", "Data Analysis", "SEO", "Email Marketing", "Blog Writing"],
       achievements: [
         "Improved campaign performance tracking accuracy by 25%",
-        "Generated detailed marketing insights reports for stakeholders",
+        "Increased email open rates by 15% through targeted strategies",
         "Contributed to marketing strategy optimization"
       ]
     },
@@ -56,7 +54,6 @@ const experience = [
       period: "6 months",
       location: "Pune, Maharashtra, India",
       type: "Full-time",
-      logo: "https://images.unsplash.com/photo-1553028826-f4804151e4cd?w=100&h=100&fit=crop",
       description: "Executed digital marketing campaigns and managed online marketing initiatives.",
       responsibilities: [
         "Executed digital marketing campaigns across multiple platforms",
@@ -66,7 +63,7 @@ const experience = [
       ],
       technologies: ["Digital Marketing", "Social Media", "Content Management", "Analytics"],
       achievements: [
-        "Successfully managed 10+ marketing campaigns",
+        "Successfully managed marketing campaigns",
         "Increased social media engagement by 40%",
         "Contributed to brand awareness initiatives"
       ]
@@ -79,7 +76,6 @@ const experience = [
       period: "6 months",
       location: "Pune, Maharashtra, India",
       type: "Internship",
-      logo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=100&h=100&fit=crop",
       description: "Gained hands-on experience in full-stack development and contributed to web application projects.",
       responsibilities: [
         "Contributed to web app development using Java and JavaScript",
@@ -87,7 +83,7 @@ const experience = [
         "Participated in debugging, testing, and feature implementation",
         "Collaborated with team members on problem-solving initiatives"
       ],
-      technologies: ["Java", "SQL", "HTML5", "CSS3", "JavaScript", "Web Development"],
+      technologies: ["Java", "Spring", "SQL", "HTML5", "CSS3", "JavaScript", "Web Development"],
       achievements: [
         "Successfully completed 3 web development projects",
         "Improved application performance through code optimization",
@@ -102,7 +98,6 @@ const experience = [
       period: "2 months",
       location: "India",
       type: "Part-time",
-      logo: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=100&h=100&fit=crop",
       description: "Represented Internshala on campus and promoted internship opportunities to fellow students.",
       responsibilities: [
         "Promoted Internshala's internship opportunities on campus",
@@ -112,7 +107,7 @@ const experience = [
       ],
       technologies: ["Marketing", "Event Management", "Communication"],
       achievements: [
-        "Successfully connected 50+ students with internship opportunities",
+        "Successfully connected 500+ students with internship opportunities",
         "Organized 3 campus awareness sessions",
         "Achieved campus ambassador performance targets"
       ]
@@ -125,7 +120,6 @@ const experience = [
       period: "1 month",
       location: "Jalgaon, Maharashtra, India",
       type: "Internship",
-      logo: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=100&h=100&fit=crop",
       description: "First professional experience in web development, working on responsive design and user experience.",
       responsibilities: [
         "Worked with HTML, CSS, JavaScript, and responsive design principles",
