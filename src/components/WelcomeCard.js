@@ -1,351 +1,326 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiDownload, FiArrowRight } from "react-icons/fi";
 import profile from "../assets/images/profile.jpg";
+
+const roles = [
+  "Full Stack Developer",
+  "React.js Developer",
+  "Laravel / PHP Developer",
+  "REST API Specialist"
+];
+
+const techStack = [
+  { name: "React.js", color: "#61dafb" },
+  { name: "Laravel", color: "#f05340" },
+  { name: "PHP", color: "#7a86b8" },
+  { name: "Node.js", color: "#68a063" },
+  { name: "PostgreSQL", color: "#336791" },
+  { name: "Redux", color: "#764abc" }
+];
 
 const WelcomeCard = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setIsVisible(true);
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setMousePosition({ x, y });
-  };
+  // Typing animation
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
 
-  const skills = [
-    { label: "React.js", color: "var(--accent-gradient)" },
-    { label: "Laravel", color: "var(--secondary-gradient)" },
-    { label: "PHP • MySQL", color: "var(--warning-gradient)" },
-    { label: "Java", color: "var(--success-gradient)" }
-  ];
+    if (!isDeleting && displayText === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2200);
+    } else if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else {
+      const speed = isDeleting ? 45 : 75;
+      timeout = setTimeout(() => {
+        setDisplayText((prev) =>
+          isDeleting ? prev.slice(0, -1) : currentRole.slice(0, prev.length + 1)
+        );
+      }, speed);
+    }
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, roleIndex]);
 
   return (
-    <div className="welcome-hero min-vh-100 d-flex align-items-center justify-content-center p-4 position-relative">
-
-      {/* Animated Background Elements */}
-      <div className="position-absolute w-100 h-100" style={{ top: 0, left: 0, zIndex: -1 }}>
-        <div className="floating-shape shape-1"></div>
-        <div className="floating-shape shape-2"></div>
-        <div className="floating-shape shape-3"></div>
-        <div className="floating-shape shape-4"></div>
+    <section
+      className="min-vh-100 d-flex align-items-center position-relative"
+      style={{ padding: "80px 0 60px" }}
+    >
+      {/* Ambient background blobs */}
+      <div className="position-absolute" style={{ inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
+        <div style={{
+          position: "absolute", width: 500, height: 500, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
+          top: "-100px", left: "-150px", filter: "blur(40px)"
+        }} />
+        <div style={{
+          position: "absolute", width: 400, height: 400, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)",
+          top: "10%", right: "-100px", filter: "blur(40px)"
+        }} />
+        <div style={{
+          position: "absolute", width: 300, height: 300, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
+          bottom: "5%", left: "30%", filter: "blur(40px)"
+        }} />
       </div>
 
-      <div
-        className={`glass-card p-5 text-center position-relative overflow-hidden ${isVisible ? 'animate-fade-in-up' : ''}`}
-        style={{
-          maxWidth: '800px',
-          borderRadius: '2rem',
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 50%, transparent 100%)`
-        }}
-        onMouseMove={handleMouseMove}
-      >
+      <div className="container position-relative" style={{ zIndex: 1 }}>
+        <div className="row align-items-center g-5">
 
-        {/* Glowing border effect */}
-        <div className="position-absolute top-0 start-0 w-100 h-100"
-          style={{
-            borderRadius: '2rem',
-            padding: '1px',
-            background: 'var(--primary-gradient)',
-            opacity: '0.3',
-            zIndex: '-1'
-          }}>
-          <div className="w-100 h-100"
-            style={{
-              borderRadius: '2rem',
-              background: 'var(--bg-glass)'
-            }}></div>
-        </div>
+          {/* ── LEFT: Text Content ── */}
+          <div className={`col-lg-7 ${isVisible ? "animate-fade-in-left" : ""}`}>
 
-        {/* Profile Image with Animation */}
-        <div className="mb-4 position-relative">
-          <div className="d-inline-block position-relative">
-            <div className="position-absolute top-50 start-50 translate-middle"
-              style={{
-                width: '200px',
-                height: '200px',
-                background: 'var(--primary-gradient)',
-                borderRadius: '50%',
-                opacity: '0.2',
-                animation: 'pulse-glow 3s ease-in-out infinite',
-                zIndex: '-1'
-              }}></div>
-            <img
-              src={profile}
-              alt="Rushikesh Sonar"
-              className="rounded-circle shadow-lg"
-              style={{
-                width: '150px',
-                height: '150px',
-                objectFit: 'cover',
-                border: '4px solid rgba(255,255,255,0.2)',
-                transition: 'transform 0.3s ease'
-              }}
-              onMouseEnter={e => e.target.style.transform = 'scale(1.05)'}
-              onMouseLeave={e => e.target.style.transform = 'scale(1)'}
-            />
+            {/* Available Badge */}
+            <div className="mb-4">
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "rgba(16,185,129,0.1)",
+                border: "1px solid rgba(16,185,129,0.25)",
+                color: "#34d399", fontSize: "0.82rem", fontWeight: 600,
+                padding: "6px 16px", borderRadius: 50, letterSpacing: "0.3px"
+              }}>
+                <span style={{
+                  width: 7, height: 7, borderRadius: "50%",
+                  background: "#10b981",
+                  animation: "pulse-dot 2s infinite",
+                  display: "inline-block"
+                }} />
+                Open to opportunities
+              </span>
+            </div>
+
+            {/* Name */}
+            <h1 style={{
+              fontSize: "clamp(2.4rem, 5vw, 4rem)",
+              fontWeight: 800,
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              color: "#f0f6fc",
+              marginBottom: "12px"
+            }}>
+              Hi, I'm{" "}
+              <span className="gradient-text">Rushikesh Sonar</span>
+            </h1>
+
+            {/* Typed Role */}
+            <div style={{
+              fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
+              fontWeight: 600,
+              color: "#94a3b8",
+              marginBottom: "24px",
+              minHeight: "2rem"
+            }}>
+              <span className="gradient-text-cyan">{displayText}</span>
+              <span style={{
+                display: "inline-block",
+                width: 2, height: "1em",
+                background: "#06b6d4",
+                marginLeft: 2,
+                verticalAlign: "middle",
+                animation: "blink-caret 0.75s step-end infinite"
+              }} />
+            </div>
+
+            {/* Bio */}
+            <p style={{
+              fontSize: "1rem",
+              color: "#94a3b8",
+              lineHeight: 1.75,
+              maxWidth: 560,
+              marginBottom: "28px"
+            }}>
+              Full Stack Developer with <strong style={{ color: "#f0f6fc" }}>2+ years</strong> of experience
+              building production-grade apps using React.js & PHP/Laravel. Passionate about{" "}
+              <strong style={{ color: "#818cf8" }}>clean code</strong>, scalable architecture, and
+              turning ideas into impactful products.
+            </p>
+
+            {/* Location / Email quick info */}
+            <div className="d-flex flex-wrap gap-3 mb-4">
+              <span className="contact-link" style={{ color: "#64748b", fontSize: "0.88rem" }}>
+                <FiMapPin size={14} style={{ color: "#6366f1" }} />
+                Pune, Maharashtra, India
+              </span>
+              <a href="mailto:rushikeshsonar348@gmail.com" className="contact-link" style={{ color: "#64748b", fontSize: "0.88rem" }}>
+                <FiMail size={14} style={{ color: "#06b6d4" }} />
+                rushikeshsonar348@gmail.com
+              </a>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="d-flex flex-wrap gap-3 mb-5">
+              <button
+                className="btn-primary-custom d-inline-flex align-items-center gap-2"
+                onClick={() => navigate("/projects")}
+              >
+                View My Work
+                <FiArrowRight size={16} />
+              </button>
+              <a
+                href="/Rushikesh Sonar Resume.pdf"
+                download="Rushikesh_Sonar_Resume.pdf"
+                className="btn-outline-custom d-inline-flex align-items-center gap-2"
+                style={{ textDecoration: "none" }}
+              >
+                <FiDownload size={15} />
+                Download CV
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="d-flex gap-3">
+              <a
+                href="https://www.linkedin.com/in/rushikesh-sonar-771636187/"
+                target="_blank"
+                rel="noreferrer"
+                className="social-icon-btn"
+                title="LinkedIn"
+              >
+                <FiLinkedin />
+              </a>
+              <a
+                href="https://github.com/Rushi788816"
+                target="_blank"
+                rel="noreferrer"
+                className="social-icon-btn"
+                title="GitHub"
+              >
+                <FiGithub />
+              </a>
+              <a
+                href="mailto:rushikeshsonar348@gmail.com"
+                className="social-icon-btn"
+                title="Email"
+              >
+                <FiMail />
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* Name with Gradient */}
-        <h1 className="gradient-text mb-3"
-          style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-            fontWeight: '800',
-            lineHeight: '1.1'
-          }}>
-          Hi, I'm Rushikesh Sonar
-        </h1>
+          {/* ── RIGHT: Profile Visual ── */}
+          <div className={`col-lg-5 d-none d-lg-flex justify-content-center ${isVisible ? "animate-fade-in-right" : ""}`}>
+            <div className="position-relative" style={{ width: 340, height: 340 }}>
 
-        {/* Title */}
-        <h5 className="text-secondary mb-4"
-          style={{
-            fontSize: '1.3rem',
-            fontWeight: '600'
-          }}>
-          Junior Software Engineer | Full Stack Developer
-        </h5>
-
-        {/* Current Company Badge */}
-        <div className="mb-4">
-          <div className="glass-card d-inline-block px-4 py-2"
-            style={{ borderRadius: '25px' }}>
-            <span className="text-accent me-2">Currently at</span>
-            <strong className="gradient-text">CodeMingle</strong>
-          </div>
-        </div>
-
-        {/* Skills Section */}
-        <div className="mb-5">
-          <h6 className="text-accent mb-3" style={{ fontSize: '1rem', fontWeight: '600' }}>
-            Core Technologies:
-          </h6>
-          <div className="row g-3 justify-content-center">
-            {skills.map((skill, index) => (
-              <div key={index} className={`col-6 col-md-3 ${isVisible ? 'stagger-item' : ''}`}
-                style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="skill-badge glass-card p-3 h-100 d-flex flex-column align-items-center justify-content-center"
-                  style={{
-                    borderRadius: '20px',
-                    transition: 'all 0.3s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                  }}>
-                  <span className="fw-semibold" style={{ fontSize: '0.9rem' }}>
-                    {skill.label}
-                  </span>
-                </div>
+              {/* Rotating ring */}
+              <div style={{
+                position: "absolute", inset: -16, borderRadius: "50%",
+                border: "2px dashed rgba(99,102,241,0.2)",
+                animation: "spin 20s linear infinite"
+              }} />
+              {/* Glowing ring */}
+              <div style={{
+                position: "absolute", inset: -4, borderRadius: "50%",
+                background: "conic-gradient(from 0deg, #6366f1, #8b5cf6, #06b6d4, transparent, #6366f1)",
+                padding: 2,
+                animation: "spin 6s linear infinite"
+              }}>
+                <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "var(--bg-primary)" }} />
               </div>
-            ))}
+
+              {/* Profile Image */}
+              <img
+                src={profile}
+                alt="Rushikesh Sonar"
+                style={{
+                  position: "absolute", inset: 0,
+                  width: "100%", height: "100%",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "4px solid var(--bg-primary)",
+                  zIndex: 2
+                }}
+              />
+
+              {/* Glow behind image */}
+              {/* <div style={{
+                position: "absolute", inset: 10, borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%)",
+                zIndex: 1, filter: "blur(20px)"
+              }} /> */}
+
+              {/* Floating Tech Badges */}
+              {/* {techStack.map((tech, i) => {
+                const angles = [0, 60, 120, 180, 240, 300];
+                const radius = 230;
+                const angle = (angles[i] * Math.PI) / 180;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                return (
+                  <div
+                    key={tech.name}
+                    className="stagger-item"
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      top: "50%",
+                      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                      background: "rgba(13, 18, 36, 0.95)",
+                      border: `1px solid ${tech.color}30`,
+                      borderRadius: 8,
+                      padding: "5px 12px",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: tech.color,
+                      whiteSpace: "nowrap",
+                      zIndex: 3,
+                      boxShadow: `0 4px 12px rgba(0,0,0,0.4), 0 0 8px ${tech.color}20`,
+                      animationDelay: `${i * 0.1}s`
+                    }}
+                  >
+                    {tech.name}
+                  </div>
+                );
+              })} */}
+            </div>
           </div>
+
         </div>
 
-        {/* Bio */}
-        <div className="mb-5">
-          <p className="lead" style={{
-            fontSize: '1.1rem',
-            lineHeight: '1.7',
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            I'm passionate about building{" "}
-            <span className="fw-bold" style={{ color: '#f093fb' }}>scalable</span>,{" "}
-            <span className="fw-bold" style={{ color: '#764ba2' }}>user-friendly</span>, and{" "}
-            <span className="fw-bold" style={{ color: '#4facfe' }}>visually appealing</span>{" "}
-            web applications. Transforming{" "}
-            <span className="fw-bold gradient-text position-relative">
-              ideas into impactful solutions
-            </span>{" "}
-            using clean code and modern technologies.
-          </p>
-          <div className="mt-3 text-muted">
-            <span className="d-inline-flex align-items-center">
-              <span className="me-2">📍</span>
-              Pune, Maharashtra, India
-            </span>
-          </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center">
-          <a
-            href="/Rushikesh Sonar Resume.pdf"
-            download="Rushikesh_Sonar_Resume.pdf"
-            className="btn btn-outline-light btn-lg px-4 py-3 btn-animated"
-            style={{
-              borderRadius: '50px',
-              fontWeight: '600',
-              fontSize: '1rem',
-              minWidth: '180px',
-              borderColor: 'rgba(255,255,255,0.3)',
-              backgroundColor: 'rgba(255,255,255,0.1)'
-            }}
-          >
-            <span className="me-2">📄</span>
-            Download Resume
-          </a>
-        </div>
-
-
-        {/* Social Links */}
-        <div className="mt-4 d-flex justify-content-center gap-3">
-          <a href="https://www.linkedin.com/in/rushikesh-sonar-771636187/"
-            target="_blank"
-            rel="noreferrer"
-            className="social-link text-decoration-none"
-            style={{
-              width: '45px',
-              height: '45px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#0077b5',
-              fontSize: '1.2rem',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={e => {
-              e.target.style.transform = 'scale(1.1) translateY(-2px)';
-              e.target.style.background = 'rgba(0,119,181,0.2)';
-            }}
-            onMouseLeave={e => {
-              e.target.style.transform = 'scale(1) translateY(0)';
-              e.target.style.background = 'rgba(255,255,255,0.1)';
-            }}>
-            💼
-          </a>
-
-          <a href="https://github.com/Rushi788816"
-            target="_blank"
-            rel="noreferrer"
-            className="social-link text-decoration-none"
-            style={{
-              width: '45px',
-              height: '45px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#333',
-              fontSize: '1.2rem',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={e => {
-              e.target.style.transform = 'scale(1.1) translateY(-2px)';
-              e.target.style.background = 'rgba(51,51,51,0.2)';
-            }}
-            onMouseLeave={e => {
-              e.target.style.transform = 'scale(1) translateY(0)';
-              e.target.style.background = 'rgba(255,255,255,0.1)';
-            }}>
-            🔗
-          </a>
+        {/* ── Stats Row ── */}
+        <div className={`row g-3 mt-5 ${isVisible ? "animate-fade-in-up" : ""}`}
+          style={{ animationDelay: "0.4s" }}>
+          {[
+            { value: "2+", label: "Years Experience" },
+            { value: "22+", label: "APIs Built" },
+            { value: "3", label: "Live Projects" },
+            { value: "1000+", label: "Users Served" }
+          ].map((stat) => (
+            <div key={stat.label} className="col-6 col-md-3">
+              <div className="stat-card">
+                <div className="stat-value">{stat.value}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Additional Styles */}
-      <style jsx>{`
-        .welcome-hero {
-          background: var(--bg-primary);
-          position: relative;
-          overflow: hidden;
+      <style>{`
+        @keyframes blink-caret {
+          50% { opacity: 0; }
         }
-
-        .floating-shape {
-          position: absolute;
-          border-radius: 50%;
-          opacity: 0.1;
-          animation: float 8s ease-in-out infinite;
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
         }
-
-        .shape-1 {
-          width: 80px;
-          height: 80px;
-          background: var(--secondary-gradient);
-          top: 10%;
-          left: 10%;
-          animation-delay: 0s;
-        }
-
-        .shape-2 {
-          width: 120px;
-          height: 120px;
-          background: var(--accent-gradient);
-          top: 20%;
-          right: 15%;
-          animation-delay: 2s;
-        }
-
-        .shape-3 {
-          width: 60px;
-          height: 60px;
-          background: var(--success-gradient);
-          bottom: 25%;
-          left: 15%;
-          animation-delay: 4s;
-        }
-
-        .shape-4 {
-          width: 100px;
-          height: 100px;
-          background: var(--warning-gradient);
-          bottom: 15%;
-          right: 10%;
-          animation-delay: 1s;
-        }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          33% {
-            transform: translateY(-20px) rotate(120deg);
-          }
-          66% {
-            transform: translateY(10px) rotate(240deg);
-          }
-        }
-
-        @keyframes pulse-glow {
-          0%, 100% { 
-            transform: translate(-50%, -50%) scale(1); 
-            opacity: 0.2; 
-          }
-          50% { 
-            transform: translate(-50%, -50%) scale(1.1); 
-            opacity: 0.3; 
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 1s ease-out;
-        }
-
-        @media (max-width: 768px) {
-          .skill-badge {
-            padding: 1rem !important;
-          }
-          
-          .skill-icon {
-            width: 40px !important;
-            height: 40px !important;
-            font-size: 1.5rem !important;
-          }
+        @keyframes pulse-dot {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+          50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 
